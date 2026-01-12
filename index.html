@@ -1,37 +1,491 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NieMarCorp | Ingeniería Computacional & Desarrollo Full Stack</title>
+    <meta name="description" content="Soluciones avanzadas en Desarrollo Web, Ciberseguridad y Simulación de Ingeniería (CFD/OpenFOAM).">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; form-action 'none';">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <meta name="description" content="NieMarCorp - Soluciones avanzadas en tecnología e Ingenieria. Sitio en construcción.">
-    <meta name="author" content="NieMarCorp">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <title>NieMarCorp | Próximamente</title>
-    <link rel="stylesheet" href="styles.css">
-    
-    <link rel="icon" href="data:,">
+    <!-- Iconos (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B1120', // Fondo principal muy oscuro
+                            primary: '#3b82f6', // Azul eléctrico (Tech)
+                            secondary: '#eab308', // Dorado/Ambar (Energía)
+                            accent: '#06b6d4', // Cyan (Simulación/Futuro)
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B1120;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto Glitch sutil para títulos */
+        .tech-glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
+        /* Utilidad para el canvas de fondo */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1 class="logo">NieMarCorp</h1>
-        </header>
+<body class="antialiased selection:bg-brand-primary selection:text-white">
+
+    <!-- Canvas para animación de partículas (Nodos/Mallas) -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-[#0B1120]/80 backdrop-blur-md transition-all duration-300" id="navbar">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse group">
+                <!-- LOGO: Reemplaza src con la ruta real de tu archivo de imagen -->
+                <div class="relative w-10 h-10 overflow-hidden rounded bg-white/5 p-1 border border-white/10 group-hover:border-brand-primary/50 transition-colors">
+                     <!-- Si la imagen no carga, muestra las iniciales -->
+                    <img src="./unnamed.png" class="w-full h-full object-contain" alt="NieMarCorp Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="hidden w-full h-full items-center justify-center font-mono font-bold text-brand-primary">NM</div>
+                </div>
+                <span class="self-center text-xl font-bold whitespace-nowrap text-white tracking-wider font-mono">NIEMAR<span class="text-brand-primary">CORP</span></span>
+            </a>
+            
+            <!-- Botón Mobile -->
+            <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false" id="menu-toggle">
+                <span class="sr-only">Abrir menú</span>
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-800 rounded-lg bg-gray-900/50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
+                    <li>
+                        <a href="#inicio" class="block py-2 px-3 text-white bg-brand-primary rounded md:bg-transparent md:text-brand-primary md:p-0" aria-current="page">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#servicios" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-brand-primary md:p-0 transition-colors">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="#proyectos" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-brand-primary md:p-0 transition-colors">Ecosistema</a>
+                    </li>
+                    <li>
+                        <a href="#contacto" class="block py-2 px-3 text-brand-secondary rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-yellow-300 md:p-0 transition-colors font-mono text-sm border border-brand-secondary/30 px-4 py-1 mt-2 md:mt-0 md:border-b-2 md:border-brand-secondary">Contratar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10">
+            <!-- Terminal Badge -->
+            <div class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-brand-primary bg-brand-primary/10 rounded-full border border-brand-primary/20 hover:bg-brand-primary/20 transition-all cursor-default">
+                <span class="text-xs bg-brand-primary rounded-full text-white px-4 py-1.5 mr-3 font-mono">SYSTEM_READY</span> 
+                <span class="text-sm font-medium font-mono">v1.0.0 Stable</span>
+                <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+            </div>
+            
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-6xl lg:text-7xl font-sans">
+                Ingeniería Computacional <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent tech-glow">Software & Energía</span>
+            </h1>
+            
+            <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 lg:px-48 max-w-4xl mx-auto">
+                Fusionamos la precisión matemática de la ingeniería con la versatilidad del desarrollo Full Stack. 
+                <span class="text-brand-secondary font-mono block mt-2 text-base">> Simulaciones OpenFOAM. Sistemas Seguros. Arquitectura Escalable.</span>
+            </p>
+            
+            <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                <a href="#proyectos" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-brand-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300/20 transition-all shadow-lg shadow-blue-500/30">
+                    Ver Proyectos
+                    <i data-lucide="code-2" class="ml-2 w-5 h-5"></i>
+                </a>
+                <a href="#contacto" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-gray-300 rounded-lg border border-gray-700 hover:text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-700 transition-all font-mono">
+                    $ ./contact.sh
+                </a>
+            </div>
+
+            <!-- Stats / Tech Stack -->
+            <div class="mt-16 pt-8 border-t border-gray-800">
+                <p class="text-sm text-gray-500 font-mono mb-4 uppercase tracking-widest">Tecnologías Core</p>
+                <div class="flex flex-wrap justify-center gap-6 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                    <!-- Tech badges text based for performance/cleanliness -->
+                    <span class="flex items-center gap-2 text-gray-300 font-mono"><i data-lucide="box" class="text-orange-500"></i> OpenFOAM</span>
+                    <span class="flex items-center gap-2 text-gray-300 font-mono"><i data-lucide="cpu" class="text-blue-500"></i> React/Node</span>
+                    <span class="flex items-center gap-2 text-gray-300 font-mono"><i data-lucide="terminal" class="text-yellow-400"></i> Python/Bash</span>
+                    <span class="flex items-center gap-2 text-gray-300 font-mono"><i data-lucide="shield-check" class="text-green-500"></i> Cybersecurity</span>
+                    <span class="flex items-center gap-2 text-gray-300 font-mono"><i data-lucide="layers" class="text-red-500"></i> FreeCAD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: The Convergence (About) -->
+    <section class="py-24 bg-gray-900/30 border-y border-white/5 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+                <h2 class="mb-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+                    Más que código. <br> <span class="text-brand-secondary">Pensamiento Ingenieril.</span>
+                </h2>
+                <p class="mb-6 font-light text-gray-400 md:text-lg">
+                    En el mercado actual, cualquiera puede escribir código. En <strong>NieMarCorp</strong>, construimos sistemas. Mi background en ingeniería y simulación física me permite abordar el desarrollo de software con una mentalidad diferente: optimización, robustez y escalabilidad.
+                </p>
+                <ul class="space-y-4 text-left text-gray-300">
+                    <li class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <i data-lucide="check-circle" class="flex-shrink-0 w-5 h-5 text-brand-primary"></i>
+                        <span>Arquitectura limpia y mantenible.</span>
+                    </li>
+                    <li class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <i data-lucide="check-circle" class="flex-shrink-0 w-5 h-5 text-brand-primary"></i>
+                        <span>Seguridad integrada desde el diseño (SecDevOps).</span>
+                    </li>
+                    <li class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <i data-lucide="check-circle" class="flex-shrink-0 w-5 h-5 text-brand-secondary"></i>
+                        <span>Capacidad de cálculo científico (CFD & Analysis).</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative">
+                <!-- Abstract Code/Engineering Visual -->
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 shadow-2xl font-mono text-sm text-gray-400 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-2 opacity-50"><i data-lucide="terminal" class="w-6 h-6"></i></div>
+                    <div class="text-blue-400 mb-2">import</div> <span class="text-white">nieMarCorp</span> <div class="text-blue-400 inline">from</div> <span class="text-green-400">'future'</span>;
+                    <br><br>
+                    <span class="text-purple-400">class</span> <span class="text-yellow-400">Solution</span> {
+                    <br> &nbsp;&nbsp;<span class="text-purple-400">constructor</span>(problem) {
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-400">this</span>.tech = <span class="text-green-400">"FullStack"</span>;
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-400">this</span>.physics = <span class="text-green-400">"OpenFOAM"</span>;
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-400">this</span>.security = <span class="text-blue-500">true</span>;
+                    <br> &nbsp;&nbsp;}
+                    <br>}
+                    <br><br>
+                    <span class="text-gray-500">// Compilando soluciones complejas...</span>
+                    <br>
+                    <span class="text-brand-secondary animate-pulse">>> Ejecutando Simulación... OK</span>
+                    
+                    <!-- Decorative overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-24 bg-[#0B1120] relative">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 text-center">
+            <h2 class="mb-4 text-3xl font-bold tracking-tight text-white font-mono">/servicios</h2>
+            <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Despliegue de capacidades técnicas para clientes exigentes.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="p-8 bg-gray-900 rounded-xl border border-gray-800 hover:border-brand-primary/50 transition-all hover:transform hover:-translate-y-2 group text-left">
+                    <div class="w-14 h-14 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-primary/20 transition-colors">
+                        <i data-lucide="layout" class="w-8 h-8 text-brand-primary"></i>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-white">Desarrollo Full Stack</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sitios web corporativos, plataformas SAAS y aplicaciones a medida. React, Node.js y bases de datos optimizadas. Diseño responsive y moderno.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 bg-gray-900 rounded-xl border border-gray-800 hover:border-brand-secondary/50 transition-all hover:transform hover:-translate-y-2 group text-left">
+                    <div class="w-14 h-14 bg-brand-secondary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-secondary/20 transition-colors">
+                        <i data-lucide="wind" class="w-8 h-8 text-brand-secondary"></i>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-white">Ingeniería & Simulación</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Simulaciones CFD con OpenFOAM. Modelado 3D paramétrico en FreeCAD. Soluciones para energías renovables y análisis de fluidos.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="p-8 bg-gray-900 rounded-xl border border-gray-800 hover:border-brand-accent/50 transition-all hover:transform hover:-translate-y-2 group text-left">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition-colors">
+                        <i data-lucide="lock" class="w-8 h-8 text-brand-accent"></i>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-white">SecDevOps & Cloud</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Despliegue seguro en servidores Linux. Configuración de VPS, gestión de dominios y fortificación de aplicaciones web contra vulnerabilidades.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects / Ecosystem -->
+    <section id="proyectos" class="py-24 bg-gray-900/50 border-t border-white/5">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight text-white font-mono">/ecosistema_niemar</h2>
+                    <p class="text-gray-400 mt-2">Proyectos propios en desarrollo activo.</p>
+                </div>
+                <span class="hidden md:block text-xs font-mono text-gray-500 border border-gray-700 px-2 py-1 rounded">STATUS: DEPLOYING</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- EdgeQuantia Card -->
+                <div class="group relative overflow-hidden rounded-2xl bg-black border border-gray-800">
+                    <!-- Background gradient effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div class="relative p-8 h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="bg-blue-900/30 text-blue-400 text-xs font-mono px-3 py-1 rounded-full border border-blue-500/20">TRADING ALGORÍTMICO</div>
+                                <i data-lucide="trending-up" class="text-gray-500 group-hover:text-blue-400 transition-colors"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">EdgeQuantia</h3>
+                            <p class="text-gray-400 mb-6">Plataforma de análisis cuantitativo y estrategias de trading automatizado. Infraestructura propietaria para análisis de mercados financieros.</p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 pt-6 border-t border-white/10">
+                            <a href="https://www.edgequantia.com" target="_blank" class="text-white hover:text-brand-primary font-medium inline-flex items-center transition-colors">
+                                Visitar Sitio <i data-lucide="arrow-up-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <span class="text-xs text-gray-500 font-mono flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-yellow-500 mr-2 animate-pulse"></span> En Desarrollo
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NieMarCorp Internal Card -->
+                <div class="group relative overflow-hidden rounded-2xl bg-black border border-gray-800">
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-secondary/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div class="relative p-8 h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="bg-yellow-900/30 text-yellow-400 text-xs font-mono px-3 py-1 rounded-full border border-yellow-500/20">ENERGÍA & I+D</div>
+                                <i data-lucide="zap" class="text-gray-500 group-hover:text-yellow-400 transition-colors"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Proyecto Energía Renovable</h3>
+                            <p class="text-gray-400 mb-6">Investigación y desarrollo de sistemas energéticos sustentables optimizados mediante simulaciones de fluidos (CFD) y diseño asistido (CAD).</p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 pt-6 border-t border-white/10">
+                            <span class="text-gray-500 cursor-not-allowed font-medium inline-flex items-center">
+                                Acceso Confidencial <i data-lucide="lock" class="w-4 h-4 ml-1"></i>
+                            </span>
+                             <span class="text-xs text-gray-500 font-mono flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span> Fase Prototipo
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Minimal -->
+    <footer id="contacto" class="bg-[#050911] border-t border-gray-800">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="flex items-center">
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap text-white font-mono">NIEMAR<span class="text-brand-primary">CORP</span></span>
+                    </a>
+                    <p class="text-gray-500 mt-2 text-sm max-w-xs">Ingeniería de software y energía para el mundo moderno.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-white uppercase font-mono">Contacto</h2>
+                        <ul class="text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="mailto:contacto@niemarcorp.com" class="hover:text-brand-primary transition-colors flex items-center">
+                                    <i data-lucide="mail" class="w-4 h-4 mr-2"></i> Email
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.workana.com" target="_blank" class="hover:text-brand-primary transition-colors flex items-center">
+                                    <i data-lucide="briefcase" class="w-4 h-4 mr-2"></i> Workana Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-white uppercase font-mono">Legal</h2>
+                        <ul class="text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:underline">Terms & Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-800 sm:mx-auto lg:my-8" />
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center">© 2024 <a href="https://niemarcorp.com/" class="hover:underline">NieMarCorp™</a>. All Rights Reserved.
+                </span>
+                <div class="flex mt-4 sm:justify-center sm:mt-0 space-x-4">
+                   <div class="text-xs text-gray-600 font-mono">System Status: <span class="text-green-500">Normal</span></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Logic -->
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Menu Mobile Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navbarSticky = document.getElementById('navbar-sticky');
+        const navbar = document.getElementById('navbar');
+
+        menuToggle.addEventListener('click', () => {
+            navbarSticky.classList.toggle('hidden');
+        });
+
+        // Efecto Navbar al hacer scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'shadow-blue-900/5');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-blue-900/5');
+            }
+        });
+
+        // --- CANVAS ANIMATION (Nodes/Network/Mesh) ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
         
-        <main>
-            <div class="shield-icon">🛡️</div>
-            <h2>Sitio Web en Construcción</h2>
-            <p>Estamos desarrollando una infraestructura segura para el futuro de la Ingnieria en Energia y el Desarrollo.</p>
-            <p class="status">Estado: <span class="blink">Desarrollando núcleo...</span></p>
-        </main>
+        let width, height;
+        let particles = [];
         
-        <footer>
-            <p>&copy; 2026 NieMarCorp. Todos los derechos reservados.</p>
-            <p class="dev-signature">Desarrollado por <strong>NieMarCorp</strong></p>
-        </footer>
-    </div>
+        // Configuración
+        const particleCount = 60; // Cantidad de nodos
+        const connectionDistance = 150; // Distancia para conectar líneas
+        const mouseDistance = 200;
+
+        // Resize Canvas
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Clase Partícula
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; // Velocidad lenta
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Rebote en bordes
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.5)'; // Azul Brand
+                ctx.fill();
+            }
+        }
+
+        // Inicializar partículas
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        // Loop de animación
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Actualizar y dibujar partículas
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Dibujar líneas de conexión (Malla/Red)
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(100, 116, 139, ${1 - distance / connectionDistance})`; // Color Slate-500 con alpha
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+    </script>
 </body>
 </html>
