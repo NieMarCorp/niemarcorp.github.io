@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NieMarCorp | Ingeniería Computacional & Desarrollo Full Stack</title>
-    <meta name="description" content="Soluciones avanzadas en Desarrollo Web, Ciberseguridad y Simulación de Ingeniería (CFD/OpenFOAM).">
+    <!-- Título ajustado para reflejar marca personal + servicio profesional -->
+    <title>NieMarCorp | Alejandro G. Martin - Ingeniería de Software & Simulación</title>
+    <meta name="description" content="Portfolio profesional de Alejandro Gabriel Martin (NieMarCorp). Desarrollo Full Stack, Ciberseguridad y Simulación de Ingeniería (CFD/OpenFOAM).">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -89,13 +90,17 @@
     <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-[#0B1120]/80 backdrop-blur-md transition-all duration-300" id="navbar">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse group">
-                <!-- LOGO: Reemplaza src con la ruta real de tu archivo de imagen -->
+                <!-- LOGO -->
                 <div class="relative w-10 h-10 overflow-hidden rounded bg-white/5 p-1 border border-white/10 group-hover:border-brand-primary/50 transition-colors">
-                     <!-- Si la imagen no carga, muestra las iniciales -->
+                     <!-- Si la imagen no carga, muestra las iniciales. Asegúrate de que la ruta sea correcta. -->
                     <img src="./unnamed.png" class="w-full h-full object-contain" alt="NieMarCorp Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="hidden w-full h-full items-center justify-center font-mono font-bold text-brand-primary">NM</div>
                 </div>
-                <span class="self-center text-xl font-bold whitespace-nowrap text-white tracking-wider font-mono">NIEMAR<span class="text-brand-primary">CORP</span></span>
+                <div class="flex flex-col">
+                    <span class="self-center text-xl font-bold whitespace-nowrap text-white tracking-wider font-mono">NIEMAR<span class="text-brand-primary">CORP</span></span>
+                    <!-- Tagline miniatura para reforzar identidad personal -->
+                    <span class="text-[0.6rem] text-gray-500 font-mono tracking-widest uppercase hidden md:block">By Alejandro G. Martin</span>
+                </div>
             </a>
             
             <!-- Botón Mobile -->
@@ -110,13 +115,13 @@
                         <a href="#inicio" class="block py-2 px-3 text-white bg-brand-primary rounded md:bg-transparent md:text-brand-primary md:p-0" aria-current="page">Inicio</a>
                     </li>
                     <li>
-                        <a href="#servicios" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-brand-primary md:p-0 transition-colors">Servicios</a>
+                        <a href="#servicios" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-brand-primary md:p-0 transition-colors">Expertise</a>
                     </li>
                     <li>
                         <a href="#proyectos" class="block py-2 px-3 text-gray-300 rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-brand-primary md:p-0 transition-colors">Ecosistema</a>
                     </li>
                     <li>
-                        <a href="#contacto" class="block py-2 px-3 text-brand-secondary rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-yellow-300 md:p-0 transition-colors font-mono text-sm border border-brand-secondary/30 px-4 py-1 mt-2 md:mt-0 md:border-b-2 md:border-brand-secondary">Contratar</a>
+                        <a href="#contacto" class="block py-2 px-3 text-brand-secondary rounded hover:bg-gray-800 md:hover:bg-transparent md:hover:text-yellow-300 md:p-0 transition-colors font-mono text-sm border border-brand-secondary/30 px-4 py-1 mt-2 md:mt-0 md:border-b-2 md:border-brand-secondary">Conectar</a>
                     </li>
                 </ul>
             </div>
@@ -128,9 +133,9 @@
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10">
             <!-- Terminal Badge -->
             <div class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-brand-primary bg-brand-primary/10 rounded-full border border-brand-primary/20 hover:bg-brand-primary/20 transition-all cursor-default">
-                <span class="text-xs bg-brand-primary rounded-full text-white px-4 py-1.5 mr-3 font-mono">SYSTEM_READY</span> 
-                <span class="text-sm font-medium font-mono">v1.0.0 Stable</span>
-                <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                <span class="text-xs bg-brand-primary rounded-full text-white px-4 py-1.5 mr-3 font-mono">DEV_PROFILE</span> 
+                <span class="text-sm font-medium font-mono">Alejandro G. Martin</span>
+                <i data-lucide="check-circle" class="w-4 h-4 ml-2"></i>
             </div>
             
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-6xl lg:text-7xl font-sans">
@@ -139,13 +144,13 @@
             </h1>
             
             <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 lg:px-48 max-w-4xl mx-auto">
-                Fusionamos la precisión matemática de la ingeniería con la versatilidad del desarrollo Full Stack. 
-                <span class="text-brand-secondary font-mono block mt-2 text-base">> Simulaciones OpenFOAM. Sistemas Seguros. Arquitectura Escalable.</span>
+                Desarrollo de soluciones tecnológicas de alto impacto. Fusión de precisión matemática y arquitectura Full Stack.
+                <span class="text-brand-secondary font-mono block mt-2 text-base">> Simulaciones OpenFOAM. Sistemas Seguros. Innovación Independiente.</span>
             </p>
             
             <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                 <a href="#proyectos" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-brand-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300/20 transition-all shadow-lg shadow-blue-500/30">
-                    Ver Proyectos
+                    Ver Portafolio
                     <i data-lucide="code-2" class="ml-2 w-5 h-5"></i>
                 </a>
                 <a href="#contacto" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-gray-300 rounded-lg border border-gray-700 hover:text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-700 transition-all font-mono">
@@ -155,7 +160,7 @@
 
             <!-- Stats / Tech Stack -->
             <div class="mt-16 pt-8 border-t border-gray-800">
-                <p class="text-sm text-gray-500 font-mono mb-4 uppercase tracking-widest">Tecnologías Core</p>
+                <p class="text-sm text-gray-500 font-mono mb-4 uppercase tracking-widest">Stack Tecnológico</p>
                 <div class="flex flex-wrap justify-center gap-6 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
                     <!-- Tech badges text based for performance/cleanliness -->
                     <span class="flex items-center gap-2 text-gray-300 font-mono"><i data-lucide="box" class="text-orange-500"></i> OpenFOAM</span>
@@ -173,16 +178,25 @@
         <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div>
+                <!-- Aclaración Legal/Identidad sutil pero clara -->
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-brand-secondary uppercase bg-brand-secondary/10 rounded-full border border-brand-secondary/20">
+                    Perfil Profesional
+                </div>
                 <h2 class="mb-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-                    Más que código. <br> <span class="text-brand-secondary">Pensamiento Ingenieril.</span>
+                    Código con <span class="text-brand-secondary">Pensamiento Ingenieril.</span>
                 </h2>
                 <p class="mb-6 font-light text-gray-400 md:text-lg">
-                    En el mercado actual, cualquiera puede escribir código. En <strong>NieMarCorp</strong>, construimos sistemas. Mi background en ingeniería y simulación física me permite abordar el desarrollo de software con una mentalidad diferente: optimización, robustez y escalabilidad.
+                    <strong>NieMarCorp</strong> es la identidad profesional bajo la cual diseño y construyo sistemas avanzados. 
+                    Soy <strong>Alejandro Gabriel Martin</strong>, un desarrollador e investigador autodidacta enfocado en la convergencia entre software, física y energía.
                 </p>
+                <p class="mb-6 font-light text-gray-400 md:text-lg">
+                    Mi enfoque se aleja de las soluciones genéricas. Aplico rigor matemático y principios de simulación física para crear arquitecturas de software optimizadas, robustas y escalables.
+                </p>
+                
                 <ul class="space-y-4 text-left text-gray-300">
                     <li class="flex items-center space-x-3 rtl:space-x-reverse">
                         <i data-lucide="check-circle" class="flex-shrink-0 w-5 h-5 text-brand-primary"></i>
-                        <span>Arquitectura limpia y mantenible.</span>
+                        <span>Desarrollo de autor: atención personal a cada línea de código.</span>
                     </li>
                     <li class="flex items-center space-x-3 rtl:space-x-reverse">
                         <i data-lucide="check-circle" class="flex-shrink-0 w-5 h-5 text-brand-primary"></i>
@@ -190,7 +204,7 @@
                     </li>
                     <li class="flex items-center space-x-3 rtl:space-x-reverse">
                         <i data-lucide="check-circle" class="flex-shrink-0 w-5 h-5 text-brand-secondary"></i>
-                        <span>Capacidad de cálculo científico (CFD & Analysis).</span>
+                        <span>Investigación aplicada en Cálculo Científico (CFD).</span>
                     </li>
                 </ul>
             </div>
@@ -198,19 +212,20 @@
                 <!-- Abstract Code/Engineering Visual -->
                 <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 shadow-2xl font-mono text-sm text-gray-400 relative overflow-hidden group">
                     <div class="absolute top-0 right-0 p-2 opacity-50"><i data-lucide="terminal" class="w-6 h-6"></i></div>
-                    <div class="text-blue-400 mb-2">import</div> <span class="text-white">nieMarCorp</span> <div class="text-blue-400 inline">from</div> <span class="text-green-400">'future'</span>;
+                    
+                    <div class="text-gray-500">// Identidad del Sistema</div>
+                    <div class="text-blue-400 mb-2">const</div> <span class="text-white">developer</span> = {
+                    <br> &nbsp;&nbsp;name: <span class="text-green-400">"Alejandro G. Martin"</span>,
+                    <br> &nbsp;&nbsp;brand: <span class="text-green-400">"NieMarCorp"</span>,
+                    <br> &nbsp;&nbsp;role: <span class="text-green-400">"Full Stack Engineer"</span>,
+                    <br> &nbsp;&nbsp;focus: [<span class="text-yellow-400">"Physics"</span>, <span class="text-yellow-400">"Energy"</span>, <span class="text-yellow-400">"Code"</span>]
+                    <br>};
                     <br><br>
-                    <span class="text-purple-400">class</span> <span class="text-yellow-400">Solution</span> {
-                    <br> &nbsp;&nbsp;<span class="text-purple-400">constructor</span>(problem) {
-                    <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-400">this</span>.tech = <span class="text-green-400">"FullStack"</span>;
-                    <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-400">this</span>.physics = <span class="text-green-400">"OpenFOAM"</span>;
-                    <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-400">this</span>.security = <span class="text-blue-500">true</span>;
-                    <br> &nbsp;&nbsp;}
+                    <span class="text-purple-400">function</span> <span class="text-yellow-400">deploySolution</span>() {
+                    <br> &nbsp;&nbsp;<span class="text-red-400">return</span> developer.focus.map(skill => <span class="text-blue-500">new</span> Innovation(skill));
                     <br>}
                     <br><br>
-                    <span class="text-gray-500">// Compilando soluciones complejas...</span>
-                    <br>
-                    <span class="text-brand-secondary animate-pulse">>> Ejecutando Simulación... OK</span>
+                    <span class="text-brand-secondary animate-pulse">>> System Online... Waiting for input_</span>
                     
                     <!-- Decorative overlay -->
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50"></div>
@@ -223,7 +238,7 @@
     <section id="servicios" class="py-24 bg-[#0B1120] relative">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 text-center">
             <h2 class="mb-4 text-3xl font-bold tracking-tight text-white font-mono">/servicios</h2>
-            <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Despliegue de capacidades técnicas para clientes exigentes.</p>
+            <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Capacidades técnicas desplegadas con precisión profesional.</p>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Service 1 -->
@@ -233,7 +248,7 @@
                     </div>
                     <h3 class="mb-3 text-xl font-bold text-white">Desarrollo Full Stack</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Sitios web corporativos, plataformas SAAS y aplicaciones a medida. React, Node.js y bases de datos optimizadas. Diseño responsive y moderno.
+                        Construcción de plataformas web robustas y escalables. Desde el backend con Node.js hasta interfaces reactivas modernas. Código limpio, mantenible y propiedad intelectual garantizada.
                     </p>
                 </div>
 
@@ -244,7 +259,7 @@
                     </div>
                     <h3 class="mb-3 text-xl font-bold text-white">Ingeniería & Simulación</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Simulaciones CFD con OpenFOAM. Modelado 3D paramétrico en FreeCAD. Soluciones para energías renovables y análisis de fluidos.
+                        Investigación y desarrollo en mecánica de fluidos computacional (CFD) utilizando OpenFOAM. Modelado 3D paramétrico (FreeCAD) enfocado en energías renovables.
                     </p>
                 </div>
 
@@ -255,7 +270,7 @@
                     </div>
                     <h3 class="mb-3 text-xl font-bold text-white">SecDevOps & Cloud</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Despliegue seguro en servidores Linux. Configuración de VPS, gestión de dominios y fortificación de aplicaciones web contra vulnerabilidades.
+                        Configuración y fortificación de servidores Linux. Gestión segura de VPS, dominios y despliegue continuo. Prioridad en la ciberseguridad defensiva.
                     </p>
                 </div>
             </div>
@@ -268,7 +283,7 @@
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
                 <div>
                     <h2 class="text-3xl font-bold tracking-tight text-white font-mono">/ecosistema_niemar</h2>
-                    <p class="text-gray-400 mt-2">Proyectos propios en desarrollo activo.</p>
+                    <p class="text-gray-400 mt-2">Iniciativas propias y desarrollos en curso.</p>
                 </div>
                 <span class="hidden md:block text-xs font-mono text-gray-500 border border-gray-700 px-2 py-1 rounded">STATUS: DEPLOYING</span>
             </div>
@@ -286,7 +301,7 @@
                                 <i data-lucide="trending-up" class="text-gray-500 group-hover:text-blue-400 transition-colors"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-2">EdgeQuantia</h3>
-                            <p class="text-gray-400 mb-6">Plataforma de análisis cuantitativo y estrategias de trading automatizado. Infraestructura propietaria para análisis de mercados financieros.</p>
+                            <p class="text-gray-400 mb-6">Herramientas de análisis cuantitativo desarrolladas para estudio de mercados. Infraestructura propietaria de escaneo y cálculo.</p>
                         </div>
                         
                         <div class="flex items-center space-x-4 pt-6 border-t border-white/10">
@@ -311,7 +326,7 @@
                                 <i data-lucide="zap" class="text-gray-500 group-hover:text-yellow-400 transition-colors"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-2">Proyecto Energía Renovable</h3>
-                            <p class="text-gray-400 mb-6">Investigación y desarrollo de sistemas energéticos sustentables optimizados mediante simulaciones de fluidos (CFD) y diseño asistido (CAD).</p>
+                            <p class="text-gray-400 mb-6">Investigación independiente de sistemas energéticos sustentables. Optimización mediante CFD y diseño asistido (CAD).</p>
                         </div>
                         
                         <div class="flex items-center space-x-4 pt-6 border-t border-white/10">
@@ -349,30 +364,35 @@
                             </li>
                             <li>
                                 <a href="https://www.workana.com/freelancer/743a99d8e427376187eacbff6e26844f" target="_blank" class="hover:text-brand-primary transition-colors flex items-center">
-                                    <i data-lucide="briefcase" class="w-4 h-4 mr-2"></i> Workana Profile
+                                    <i data-lucide="briefcase" class="w-4 h-4 mr-2"></i> Perfil Profesional
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div>
                         <h2 class="mb-6 text-sm font-semibold text-white uppercase font-mono">Legal</h2>
+                        <!-- Enlaces preparados para los próximos archivos que crearemos -->
                         <ul class="text-gray-400 font-medium">
                             <li class="mb-4">
-                                <a href="#" class="hover:underline">Privacy Policy</a>
+                                <a href="aviso-legal.html" class="hover:underline hover:text-white transition-colors">Aviso Legal</a>
                             </li>
                             <li>
-                                <a href="#" class="hover:underline">Terms & Conditions</a>
+                                <a href="privacidad.html" class="hover:underline hover:text-white transition-colors">Política de Privacidad</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <hr class="my-6 border-gray-800 sm:mx-auto lg:my-8" />
-            <div class="sm:flex sm:items-center sm:justify-between">
-                <span class="text-sm text-gray-500 sm:text-center">© 2026 <a href="https://niemarcorp.com/" class="hover:underline">NieMarCorp™</a>. All Rights Reserved.
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <span class="text-sm text-gray-500 sm:text-center">
+                    © 2026 NieMarCorp. Todos los derechos reservados. <br class="sm:hidden">
+                    <span class="text-xs opacity-70 block mt-1">NieMarCorp es una marca comercial propiedad de Alejandro G. Martin.</span>
                 </span>
-                <div class="flex mt-4 sm:justify-center sm:mt-0 space-x-4">
-                   <div class="text-xs text-gray-600 font-mono">System Status: <span class="text-green-500">Normal</span></div>
+                <div class="flex sm:justify-center space-x-4">
+                   <div class="text-xs text-gray-600 font-mono flex items-center">
+                       <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span> System Status: Nominal
+                   </div>
                 </div>
             </div>
         </div>
