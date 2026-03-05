@@ -3,184 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NieMarCorp | En Mantenimiento</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <!-- Esta etiqueta bloquea a los buscadores y bots para que NO guarden la página -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>NieMarCorp | Espacio de Estudio</title>
     <style>
         :root {
-            --bg-color: #0B1120; /* Fondo original de NieMarCorp */
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --brand-primary: #3b82f6; /* Azul eléctrico */
-            --brand-secondary: #eab308; /* Dorado/Ambar */
+            --bg-dark: #050505;
+            --text-main: #d1d5db;
+            --text-dim: #6b7280;
+            --accent: #10b981; /* Un verde sereno, asociado a la energía y crecimiento */
+            --box-bg: #111827;
+            --box-border: #1f2937;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
-            overflow: hidden;
-            background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px; /* Efecto de grilla de ingeniería */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .container {
-            max-width: 650px;
-            padding: 3rem 2rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            background: rgba(11, 17, 32, 0.8);
+        .card {
+            max-width: 600px;
+            background-color: var(--box-bg);
+            border: 1px solid var(--box-border);
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
-        }
-
-        /* Pequeño adorno técnico en la esquina */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 20px;
-            width: 40px;
-            height: 2px;
-            background-color: var(--brand-primary);
-        }
-
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        .logo span {
-            color: var(--brand-primary);
-        }
-
-        .tagline {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 2rem;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.35rem 1rem;
-            background-color: rgba(234, 179, 8, 0.1); /* Tono secondary (dorado) */
-            color: var(--brand-secondary);
-            border: 1px solid rgba(234, 179, 8, 0.3);
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--brand-secondary);
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: pulse-warning 2s infinite;
+            padding: 50px 40px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-weight: 500;
         }
 
         p {
-            color: var(--text-muted);
+            font-size: 1rem;
             line-height: 1.7;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
         }
 
-        .terminal-box {
-            background-color: #05080f;
-            border: 1px solid #1f2937;
-            border-radius: 6px;
-            padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
+        .divider {
+            height: 1px;
+            background-color: var(--box-border);
+            margin: 40px 0 20px 0;
+        }
+
+        .footer-text {
             font-size: 0.85rem;
-            color: #10b981; /* Verde consola */
-            text-align: left;
-            margin-bottom: 2rem;
+            color: var(--text-dim);
+            line-height: 1.5;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 15px;
-            background-color: #10b981;
-            vertical-align: middle;
-            animation: blink 1s step-end infinite;
-        }
-
-        .footer {
-            font-size: 0.8rem;
-            color: #4b5563;
-            border-top: 1px solid #1f2937;
-            padding-top: 1.5rem;
-        }
-
-        @keyframes pulse-warning {
-            0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(234, 179, 8, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .name-highlight {
+            color: #ffffff;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo">NIEMAR<span>CORP</span></div>
-        <div class="tagline">By Alejandro G. Martin</div>
+    <div class="card">
+        <h1>NieMarCorp</h1>
+        <h2>Espacio de Estudio e Investigación</h2>
         
-        <div class="status-badge">
-            <div class="pulse-dot"></div>
-            SISTEMA EN REVISIÓN Y MANTENIMIENTO
-        </div>
+        <p>Este dominio se encuentra en un estado de pausa activa. Actualmente está reservado de manera exclusiva como un entorno privado para el aprendizaje autodidacta y la investigación tecnológica.</p>
         
-        <h1>Actualización de Infraestructura</h1>
-        <p>
-            Estamos realizando auditorías de cumplimiento normativo (Compliance), actualizaciones de ciberseguridad y mejoras en la arquitectura del sistema. 
-        </p>
+        <p>No existe ninguna entidad corporativa operando bajo este nombre en este momento, ni se ofrecen servicios, herramientas o plataformas al público. El propósito de este espacio es el estudio profundo en áreas de ingeniería de software, ciberseguridad y tecnologías sustentables.</p>
+        
+        <p>Todo desarrollo futuro se realizará respetando los más altos estándares éticos, morales y legales. Hasta que ese momento llegue, este sitio permanecerá cerrado al escrutinio público para proteger la integridad del proceso de aprendizaje.</p>
 
-        <div class="terminal-box">
-            > Iniciando protocolo de revisión legal... [OK]<br>
-            > Asegurando despliegues y repositorios... [OK]<br>
-            > Preparando nuevas iteraciones del ecosistema... <span class="cursor"></span>
-        </div>
+        <div class="divider"></div>
 
-        <div class="footer">
-            &copy; 2026 NieMarCorp. Todos los derechos reservados.<br>
-            Ingeniería de Software, Simulación & Ciberseguridad.
+        <div class="footer-text">
+            Dominio administrado por <span class="name-highlight">Alejandro Gabriel Martin</span>.<br>
+            En preparación para futuros proyectos orientados al beneficio colectivo.
         </div>
     </div>
 
